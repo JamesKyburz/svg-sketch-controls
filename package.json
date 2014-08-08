@@ -1,0 +1,27 @@
+{
+  "name": "svg-sketch-controls",
+  "description": "svg drawing controls for svg-sketch",
+  "keywords": "svg-sketch svg json",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jameskyburz/svg-sketch-controls"
+  },
+  "author": {
+    "name": "James Kyburz",
+    "email": "james.kyburz@gmail.com"
+  },
+  "main": "index.js",
+  "version": "0.0.0",
+  "license": "MIT",
+  "browserify": {
+    "transform": [
+      "bulkify"
+    ]
+  },
+  "dependencies": {
+    "browserify": "^5.9.1",
+    "bulkify": "^1.0.2",
+    "inherits": "^2.0.1",
+    "shallow-copy": "0.0.1"
+  }
+}
