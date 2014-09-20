@@ -14,6 +14,10 @@ Text.prototype.matchEvent = function matchEvent(event) {
 };
 
 Text.prototype.down = function(xy) {
+  process.nextTick(this._createEvent.bind(this, xy));
+};
+
+Text.prototype._createEvent = function(xy) {
   this.event = {
     type: 'text',
     args: {
@@ -37,22 +41,21 @@ Text.prototype.down = function(xy) {
 
 Text.prototype.pathSelected = function(opt) {
   var path = opt.path;
-  var e = opt.e;
-
   if (path.type !== 'text') return;
+  opt.e.stopPropagation();
+  process.nextTick(this._updateEvent.bind(this, opt));
+};
 
-  var newText = prompt('text', e.target.textContent);
-
+Text.prototype._updateEvent = function(opt) {
+  var newText = prompt('text', opt.e.target.textContent);
   if (newText) {
     this.emit('createEvent', {
       type: 'changeText',
       args: {
         value: newText
       },
-      target: e.target,
-      path: path
+      target: opt.e.target,
+      path: opt.path
     });
   }
-
-  e.stopPropagation();
 };
