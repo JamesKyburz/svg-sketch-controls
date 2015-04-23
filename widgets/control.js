@@ -58,15 +58,27 @@ function boundcheck(x, y) {
 
 Control.prototype._checkCloseToPath = function checkCloseToPath(xy, e) {
   if (!this.el.getIntersectionList) return;
+  var close;
+  var self = this;
+  [0, 5, -5].forEach(check);
+
+  function check(offset) {
+    if (!close) close = self._closeToPath(xy[0] + offset, xy[1] + offset);
+  }
+};
+
+Control.prototype._closeToPath = function closeToPath(x, y) {
   var rect = this.el.createSVGRect();
-  rect.x = xy[0];
-  rect.y = xy[1];
+  rect.x = x;
+  rect.y = y;
   rect.width = 7;
   rect.height = 7;
-  var list = [].slice.call(this.el.getIntersectionList(rect, this.el)).filter(notGrid);
+
+  var list = [].slice.call(this.el.getIntersectionList(rect, null)).filter(notGrid);
 
   if (list.length) {
     return this.emit('closeToPath', {target: list[0]});
+    return list.length;
   }
 
   function notGrid(element) {
