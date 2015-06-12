@@ -4,9 +4,10 @@ var Control      = require('./control');
 module.exports = Text;
 inherits(Text, Control);
 
-function Text(opt) {
+function Text(opt, dialogs) {
   if (!(this instanceof Text)) return new Text(opt);
   this.constructor.super_.call(this, opt);
+  this.dialogs = dialogs;
 }
 
 Text.prototype.matchEvent = function matchEvent(event) {
@@ -18,25 +19,32 @@ Text.prototype.down = function(xy) {
 };
 
 Text.prototype._createEvent = function(xy) {
-  this.event = {
-    type: 'text',
-    args: {
-      value: prompt('text'),
-      x: xy[0],
-      y: xy[1]
-    },
-    layout: {
-      font: {
-        name: 'default',
-        size: 20
+  if (this.dialogs) {
+    this.dialogs.prompt(create.bind(this))
+  } else {
+    create.bind(this)(prompt());
+  }
+  function create(text) {
+    this.event = {
+      type: 'text',
+      args: {
+        value: text,
+        x: xy[0],
+        y: xy[1]
       },
-      style: {
-        characterSpacing: 3
-      }
-    },
-    origin: xy
-  };
-  this.emit('createEvent', this.event);
+      layout: {
+        font: {
+          name: 'default',
+          size: 20
+        },
+        style: {
+          characterSpacing: 3
+        }
+      },
+      origin: xy
+    };
+    this.emit('createEvent', this.event);
+  }
 };
 
 Text.prototype.pathSelected = function(opt) {
@@ -47,15 +55,22 @@ Text.prototype.pathSelected = function(opt) {
 };
 
 Text.prototype._updateEvent = function(opt) {
-  var newText = prompt('text', opt.e.target.textContent);
-  if (newText) {
-    this.emit('createEvent', {
-      type: 'changeText',
-      args: {
-        value: newText
-      },
-      target: opt.e.target,
-      path: opt.path
-    });
+  var defaultValue = opt.e.target.textContent;
+  if (this.dialogs) {
+    this.dialogs.prompt('text', defaultValue, update.bind(this));
+  } else {
+    update.bind(this)(prompt('text', defaultValue));
+  }
+  function update(text) {
+    if (text) {
+      this.emit('createEvent', {
+        type: 'changeText',
+        args: {
+          value: text
+        },
+        target: opt.e.target,
+        path: opt.path
+      });
+    }
   }
 };
