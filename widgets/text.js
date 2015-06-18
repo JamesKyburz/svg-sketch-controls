@@ -18,11 +18,15 @@ Text.prototype.down = function(xy) {
   process.nextTick(this._createEvent.bind(this, xy));
 };
 
+Text.prototype.setText = function(text) {
+  this.text = text;
+};
+
 Text.prototype._createEvent = function(xy) {
-  if (this.dialogs) {
+  if (this.dialogs && !this.text) {
     this.dialogs.prompt(create.bind(this))
   } else {
-    create.bind(this)(prompt());
+    create.bind(this)(this.text || prompt());
   }
   function create(text) {
     this.event = {
