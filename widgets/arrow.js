@@ -61,10 +61,10 @@ Arrow.prototype.move = function move(xy) {
     self.event.args.d = d;
     function path() {
       var d = '';
-      d += ' M ' + arrow[0][0] + ' ' + arrow[0][1];
-      d += ' L ' + arrow[1][0] + ' ' + arrow[1][1];
-      d += ' M ' + arrow[2][0] + ' ' + arrow[2][1];
-      d += ' L ' + arrow[0][0] + ' ' + arrow[0][1];
+      d += ' L ' + arrow[0][0] + ',' + arrow[0][1];
+      d += ' L ' + arrow[1][0] + ',' + arrow[1][1];
+      d += ' L ' + arrow[0][0] + ',' + arrow[0][1];
+      d += ' L ' + arrow[2][0] + ',' + arrow[2][1];
       return d;
     }
   }
