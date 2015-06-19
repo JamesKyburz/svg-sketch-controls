@@ -76,10 +76,7 @@ Control.prototype._closeToPath = function closeToPath(x, y) {
 
   var list = [].slice.call(this.el.getIntersectionList(rect, null)).filter(notGrid);
 
-  if (list.length) {
-    return this.emit('closeToPath', {target: list[0]});
-    return list.length;
-  }
+  if (list.length) return this.emit('closeToPath', {target: list[0]});
 
   function notGrid(element) {
     return element.classList[0] !== 'grid';
