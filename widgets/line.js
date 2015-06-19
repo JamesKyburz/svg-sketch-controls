@@ -11,7 +11,8 @@ function Line(opt) {
 
 Line.prototype.matchEvent = function matchEvent(event) {
   return event.type === 'path' && event.args.d &&
-    event.args.d.split(',').length === 3
+    event.args.d.split(',').length === 3 &&
+    !event.args['data-arrow']
   ;
 };
 
