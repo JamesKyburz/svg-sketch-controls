@@ -24,9 +24,9 @@ Text.prototype.setText = function(text) {
 
 Text.prototype._createEvent = function(xy) {
   if (this.dialogs && !this.text) {
-    this.dialogs.prompt(create.bind(this));
+    this.dialogs.prompt('text', create.bind(this));
   } else {
-    create.bind(this)(this.text || prompt());
+    create.bind(this)(this.text || prompt('text'));
   }
   function create(text) {
     this.event = {
