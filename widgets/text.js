@@ -1,5 +1,6 @@
-var inherits     = require('inherits');
-var Control      = require('./control');
+var inherits = require('inherits');
+var Control = require('./control');
+var xtend = require('xtend');
 
 module.exports = Text;
 inherits(Text, Control);
@@ -8,6 +9,15 @@ function Text(opt, dialogs) {
   if (!(this instanceof Text)) return new Text(opt);
   this.constructor.super_.call(this, opt);
   this.dialogs = dialogs;
+  this.layout = {
+    font: {
+      name: 'default',
+      size: 20
+    },
+    style: {
+      characterSpacing: 3
+    }
+  };
 }
 
 Text.prototype.matchEvent = function matchEvent(event) {
@@ -20,6 +30,10 @@ Text.prototype.down = function(xy) {
 
 Text.prototype.setText = function(text) {
   this.text = text;
+};
+
+Text.prototype.setLayout = function(layout) {
+  this.layout = xtend(this.layout, layout);
 };
 
 Text.prototype._createEvent = function(xy) {
@@ -36,15 +50,7 @@ Text.prototype._createEvent = function(xy) {
         x: xy[0],
         y: xy[1]
       },
-      layout: {
-        font: {
-          name: 'default',
-          size: 20
-        },
-        style: {
-          characterSpacing: 3
-        }
-      },
+      layout: this.layout,
       origin: xy
     };
     this.emit('createEvent', this.event);
