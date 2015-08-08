@@ -21,6 +21,6 @@
   "dependencies": {
     "bulkify": "^1.1.1",
     "inherits": "^2.0.1",
-    "shallow-copy": "0.0.1"
+    "xtend": "^4.0.0"
   }
 }

@@ -1,7 +1,7 @@
-var inherits     = require('inherits');
-var Control      = require('./control');
-var movePath     = require('../move_path');
-var copy         = require('shallow-copy');
+var inherits = require('inherits');
+var Control = require('./control');
+var movePath = require('../move_path');
+var xtend = require('xtend');
 
 module.exports = Move;
 inherits(Move, Control);
@@ -29,7 +29,7 @@ Move.prototype.move = function move(xy) {
     x -= 9;
     y += 9;
 
-    event.args = copy(target.args);
+    event.args = xtend(target.args);
     delete event.args.value;
     movePath({x: x, y: y, event: event});
     this.emit('updateEvent', event);
