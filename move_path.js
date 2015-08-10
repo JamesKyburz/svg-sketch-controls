@@ -10,7 +10,7 @@ module.exports = function move(opt) {
     {o: event.args, keys:['height', 'width'], values: [0, 0]},
     {o: event.args, keys:['rx', 'ry'], values: [0, 0]},
     event.layout ?
-    {o: event.layout.font, keys: ['size'], values: [opt.scale < 1 ? 0.4 / opt.scale : 0]}
+    {o: event.layout.font, keys: ['size'], values: [0]}
     :
     {},
     event.layout ?
