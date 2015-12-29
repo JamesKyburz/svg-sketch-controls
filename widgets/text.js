@@ -1,14 +1,14 @@
-var inherits = require('inherits');
-var Control = require('./control');
-var xtend = require('xtend');
+var inherits = require('inherits')
+var Control = require('./control')
+var xtend = require('xtend')
 
-module.exports = Text;
-inherits(Text, Control);
+module.exports = Text
+inherits(Text, Control)
 
-function Text(opt, dialogs) {
-  if (!(this instanceof Text)) return new Text(opt);
-  this.constructor.super_.call(this, opt);
-  this.dialogs = dialogs;
+function Text (opt, dialogs) {
+  if (!(this instanceof Text)) return new Text(opt)
+  this.constructor.super_.call(this, opt)
+  this.dialogs = dialogs
   this.layout = {
     font: {
       name: 'default',
@@ -17,32 +17,32 @@ function Text(opt, dialogs) {
     style: {
       characterSpacing: 3
     }
-  };
+  }
 }
 
-Text.prototype.matchEvent = function matchEvent(event) {
-  return event.type === 'text';
-};
+Text.prototype.matchEvent = function matchEvent (event) {
+  return event.type === 'text'
+}
 
-Text.prototype.down = function(xy) {
-  process.nextTick(this._createEvent.bind(this, xy));
-};
+Text.prototype.down = function (xy) {
+  process.nextTick(this._createEvent.bind(this, xy))
+}
 
-Text.prototype.setText = function(text) {
-  this.text = text;
-};
+Text.prototype.setText = function (text) {
+  this.text = text
+}
 
-Text.prototype.setLayout = function(layout) {
-  this.layout = xtend(this.layout, layout);
-};
+Text.prototype.setLayout = function (layout) {
+  this.layout = xtend(this.layout, layout)
+}
 
-Text.prototype._createEvent = function(xy) {
+Text.prototype._createEvent = function (xy) {
   if (this.dialogs && !this.text) {
-    this.dialogs.prompt('text', create.bind(this));
+    this.dialogs.prompt('text', create.bind(this))
   } else {
-    create.bind(this)(this.text || prompt('text'));
+    create.bind(this)(this.text || window.prompt('text'))
   }
-  function create(text) {
+  function create (text) {
     this.event = {
       type: 'text',
       args: {
@@ -52,26 +52,26 @@ Text.prototype._createEvent = function(xy) {
       },
       layout: this.layout,
       origin: xy
-    };
-    this.emit('createEvent', this.event);
+    }
+    this.emit('createEvent', this.event)
   }
-};
+}
 
-Text.prototype.pathSelected = function(opt) {
-  var path = opt.path;
-  if (path.type !== 'text') return;
-  opt.e.stopPropagation();
-  process.nextTick(this._updateEvent.bind(this, opt));
-};
+Text.prototype.pathSelected = function (opt) {
+  var path = opt.path
+  if (path.type !== 'text') return
+  opt.e.stopPropagation()
+  process.nextTick(this._updateEvent.bind(this, opt))
+}
 
-Text.prototype._updateEvent = function(opt) {
-  var defaultValue = opt.e.target.textContent;
+Text.prototype._updateEvent = function (opt) {
+  var defaultValue = opt.e.target.textContent
   if (this.dialogs) {
-    this.dialogs.prompt('text', defaultValue, update.bind(this));
+    this.dialogs.prompt('text', defaultValue, update.bind(this))
   } else {
-    update.bind(this)(prompt('text', defaultValue));
+    update.bind(this)(window.prompt('text', defaultValue))
   }
-  function update(text) {
+  function update (text) {
     if (text) {
       this.emit('createEvent', {
         type: 'changeText',
@@ -80,7 +80,7 @@ Text.prototype._updateEvent = function(opt) {
         },
         target: opt.e.target,
         path: opt.path
-      });
+      })
     }
   }
-};
+}

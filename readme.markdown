@@ -2,6 +2,8 @@
 
 controls used together with [svg-sketch](https://github.com/JamesKyburz/svg-sketch)
 
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
 Try it out! [![view on requirebin](http://requirebin.com/badge.png)](http://requirebin.com/?gist=0dc5356985194d0b8466)
 
 Use with [browserify](http://browserify.org)

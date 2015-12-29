@@ -12,7 +12,6 @@
   },
   "main": "index.js",
   "version": "1.0.6",
-  "license": "MIT",
   "browserify": {
     "transform": [
       "bulkify"
@@ -23,5 +22,11 @@
     "inherits": "2.0.1",
     "xtend": "4.0.1"
   },
-  "scripts": {}
+  "scripts": {
+    "prepublish": "standard"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "standard": "5.4.1"
+  }
 }
