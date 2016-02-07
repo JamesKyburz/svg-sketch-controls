@@ -18,7 +18,7 @@
     ]
   },
   "dependencies": {
-    "bulkify": "1.1.1",
+    "bulkify": "git+ssh://github.com/jameskyburz/bulkify.git#path-transform-fix",
     "inherits": "2.0.1",
     "xtend": "4.0.1"
   },
