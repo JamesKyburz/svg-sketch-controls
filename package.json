@@ -18,7 +18,7 @@
     ]
   },
   "dependencies": {
-    "bulkify": "1.4.1",
+    "bulkify": "1.4.2",
     "inherits": "2.0.1",
     "xtend": "4.0.1"
   },
