@@ -1,10 +1,9 @@
 # svg-sketch-controls
 
+[![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/feross/standard)
 [![Greenkeeper badge](https://badges.greenkeeper.io/JamesKyburz/svg-sketch-controls.svg)](https://greenkeeper.io/)
 
 controls used together with [svg-sketch](https://github.com/JamesKyburz/svg-sketch)
-
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 Try it out! [![view on requirebin](http://requirebin.com/badge.png)](http://requirebin.com/?gist=0dc5356985194d0b8466)
 
