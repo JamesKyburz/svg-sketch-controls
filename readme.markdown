@@ -1,5 +1,7 @@
 # svg-sketch-controls
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/JamesKyburz/svg-sketch-controls.svg)](https://greenkeeper.io/)
+
 controls used together with [svg-sketch](https://github.com/JamesKyburz/svg-sketch)
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
