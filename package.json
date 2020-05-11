@@ -27,6 +27,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "standard": "10.0.2"
+    "standard": "14.3.3"
   }
 }
